@@ -107,7 +107,7 @@ public class IWorkNode : MonoBehaviour
 
     public virtual void CompleteWork()
     {
-        while (Inventory.Count > 0)
+        while (Inventory.Count > 0 && workerList.Count > 0)
         {
             for(int i = 0; i <= workerList.Count-1; i++)
             {

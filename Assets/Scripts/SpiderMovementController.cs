@@ -27,6 +27,7 @@ public class SpiderMovementController : MonoBehaviour
 
     public void RotateAndMoveTowardsTarget()
     {
+        if(targetTransform == null){return;}
         if(Vector3.Distance(MyTransform.position, TargetTransform.position) > 0)
         {
             MyTransform.LookAt(TargetTransform);
