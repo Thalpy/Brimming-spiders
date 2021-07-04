@@ -48,12 +48,15 @@ public class IWorkNode : MonoBehaviour
 
     void Update()
     {
-        if(remainingWorkTime <= 0){CompleteWork();}
-        else
+        if (workerList.Count != 0)
         {
-            foreach(Spider s in WorkerList)
+            if(remainingWorkTime <= 0){CompleteWork();}
+            else
             {
-                remainingWorkTime -= s.Speed * Time.deltaTime;
+                foreach(Spider s in WorkerList)
+                {
+                    remainingWorkTime -= s.Speed * Time.deltaTime;
+                }
             }
         }
     }
@@ -106,16 +109,18 @@ public class IWorkNode : MonoBehaviour
     {
         while (Inventory.Count > 0)
         {
-            foreach (Spider s in WorkerList)
+            for(int i = 0; i <= workerList.Count-1; i++)
             {
-                if (!s.InventoryFull){GiveResourceToWorker(YieldResource(), s);}
+                Debug.Log($"Completing work, i is {i}");
+                if (!workerList[i].InventoryFull){GiveResourceToWorker(YieldResource(), workerList[i]);}
+                if (workerList[i].InventoryFull){RemoveWorker(workerList[i]);}
             }
         }
 
-        for(int i =0; i <= WorkerList.Count; i++)
+        for(int i = 0; i <= workerList.Count-1; i++)
         {
-            RemoveWorker(WorkerList[i]);
-        }
+            RemoveWorker(workerList[i]);
+        }               
 
         DestroyNode();
     }

@@ -87,5 +87,17 @@ public class Spider : MonoBehaviour
         }
     }
 
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<IWorkNode>() == workNode)
+        {
+            Debug.Log("Now leaving the work node...");
+            workNode.RemoveWorker(this);
+            working = false;
+
+        }
+    }
+
+
     
 }
