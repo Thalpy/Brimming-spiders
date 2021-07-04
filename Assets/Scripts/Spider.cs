@@ -58,6 +58,10 @@ public class Spider : MonoBehaviour
         {
             inventoryFull = true;
         }
+        if(inventoryFull == true)
+        {
+            objective = "Store";
+        }
 
     }
 
