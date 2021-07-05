@@ -4,6 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public interface IWorkNode
+{
+    string NodeType {get; set;} // The type of node that we have - this will allow us to assign different animations etc.
+
+    double StandardWorkTime {get; set;} // the amount of time that a level 1 minion will require to complete this task
+
+    double RemainingWorkTime {get; set;} // the amount of time left for completion of this node - we can use this to calculate work progress
+    
+    bool WorkComplete {get; set;}
+
+    List<Spider> WorkerList {get; set;}
+
+    List<Resource> Inventory {get; set;}
+
+    GameObject Owner {get; set;}
+
+    double GetProgress();
+
+    void AddWorker(Spider spider);
+
+    void RemoveWorker(Spider spider);        
+}
+#region deprecated
+
+/*
 public class IWorkNode : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -146,3 +171,6 @@ public class IWorkNode : MonoBehaviour
 
 
 }
+*/
+
+#endregion

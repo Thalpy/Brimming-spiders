@@ -245,23 +245,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 324293781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575bd7916edec094486318dd50ba3ccf, type: 3}
+  m_Script: {fileID: 11500000, guid: e23e4154ed8c554439f7e90ef1dba44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nodeType: 
   standardWorkTime: 10
   remainingWorkTime: 10
+  progress: 0
   workComplete: 0
   workerList: []
-  inventory:
-  - resourceName: Test Resource
-    weight: 1
-  - resourceName: Test Resource
-    weight: 1
-  - resourceName: Test Resource
-    weight: 1
-  - resourceName: Test Resource
-    weight: 1
+  inventory: []
   owner: {fileID: 0}
 --- !u!65 &324293783
 BoxCollider:
@@ -396,7 +389,6 @@ MonoBehaviour:
   working: 0
   inventoryFull: 0
   inventory: []
-  workNode: {fileID: 0}
   objective: Resource
   spiderMovementController: {fileID: 0}
   spiderObjectiveFinder:
@@ -697,23 +689,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1033563574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575bd7916edec094486318dd50ba3ccf, type: 3}
+  m_Script: {fileID: 11500000, guid: e23e4154ed8c554439f7e90ef1dba44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nodeType: 
   standardWorkTime: 10
   remainingWorkTime: 10
+  progress: 0
   workComplete: 0
   workerList: []
-  inventory:
-  - resourceName: Test Resource
-    weight: 1
-  - resourceName: Test Resource
-    weight: 1
-  - resourceName: Test Resource
-    weight: 1
-  - resourceName: Test Resource
-    weight: 1
+  inventory: []
   owner: {fileID: 0}
 --- !u!1 &1956879059
 GameObject:
