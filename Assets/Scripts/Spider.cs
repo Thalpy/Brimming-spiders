@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spider : MonoBehaviour
+
+
+public class Spider : MonoBehaviour, IWorker
 {
     [SerializeField] private int spiderLevel;
     [SerializeField] private int maxInventorySize;
