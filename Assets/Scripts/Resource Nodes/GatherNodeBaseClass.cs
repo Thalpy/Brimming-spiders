@@ -33,8 +33,6 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
     {
         owner = gameObject;
         RemainingWorkTime = StandardWorkTime;
-
-
     }
 
     void Update()

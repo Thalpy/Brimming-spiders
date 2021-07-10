@@ -15,6 +15,8 @@ public class Spider : MonoBehaviour, IWorker
 
     [SerializeField] IWorkNode workNode;
 
+    [SerializeField] double storageTime = 2.0;
+
     [SerializeField] private string objective;
 
     [SerializeField] SpiderMovementController spiderMovementController;
@@ -36,6 +38,7 @@ public class Spider : MonoBehaviour, IWorker
 
     public List<Resource> Inventory { get => inventory; set => inventory = value; }
     public string Objective { get => objective; set => objective = value; }
+    public double StorageTime { get => storageTime; set => storageTime = value; }
 
     void Start()
     {
@@ -88,6 +91,12 @@ public class Spider : MonoBehaviour, IWorker
         if (collision.gameObject.tag == "Resource")        
         {
             Debug.Log("Hey this is a Resource!");
+            workNode =  collision.gameObject.GetComponent<IWorkNode>();
+            workNode.AddWorker(this);
+        }
+        if (collision.gameObject.tag == "Store")        
+        {
+            Debug.Log("Hey this is a Store!");
             workNode =  collision.gameObject.GetComponent<IWorkNode>();
             workNode.AddWorker(this);
         }
