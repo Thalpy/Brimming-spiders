@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class Spider : MonoBehaviour, IWorker
     [SerializeField] private bool working;
     [SerializeField] private bool inventoryFull;
     [SerializeField] private List<Resource> inventory;
+
+    [SerializeField] private string id;
 
     [SerializeField] IWorkNode workNode;
 
@@ -39,12 +42,14 @@ public class Spider : MonoBehaviour, IWorker
     public List<Resource> Inventory { get => inventory; set => inventory = value; }
     public string Objective { get => objective; set => objective = value; }
     public double StorageTime { get => storageTime; set => storageTime = value; }
+    public string Id { get => id; set => id = value; }
 
     void Start()
     {
         speed = 1.0;
         spiderObjectiveFinder = new SpiderObjectiveFinder();
         spiderMovementController = GetComponent<SpiderMovementController>();
+        id = Guid.NewGuid().ToString();
 
     }
 
