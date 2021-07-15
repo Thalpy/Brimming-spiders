@@ -14,4 +14,6 @@ public interface IWorker
     void AddResourceToInventory(Resource r);
     Resource GetResourceFromInventory();
 
+    void DoIdleAnim();
+
 }

@@ -60,15 +60,31 @@ public class Spider : MonoBehaviour, IWorker
         {
             spiderObjectiveFinder.Objective = objective;
             Transform targetTransform = spiderObjectiveFinder.GetObjectiveTransform(GetComponent<Transform>());
-            spiderMovementController.TargetTransform = targetTransform;
-            spiderMovementController.RotateAndMoveTowardsTarget();
+            if (targetTransform == null)
+            {
+                DoIdleAnim();
+            }
+            else
+            {
+                spiderMovementController.TargetTransform = targetTransform;
+                spiderMovementController.RotateAndMoveTowardsTarget();
+            }
 
         }
-        if(inventory.Count == MaxInventorySize)
+        else
         {
-            inventoryFull = true;
+            DoWorkingAnim();
+        }
+        if(working == true && workNode == null)
+        {
+            working = false;
         }
         if(inventoryFull == true)
+        {
+            objective = "Store";
+        }
+
+        if(inventory.Count != 0 && working == false)
         {
             objective = "Store";
         }
@@ -116,6 +132,16 @@ public class Spider : MonoBehaviour, IWorker
             working = false;
 
         }
+    }
+
+    public void DoIdleAnim()
+    {
+        Debug.Log("Idle animation is not yet implemented!");
+    }
+
+    public void DoWorkingAnim()
+    {
+        Debug.Log("Working animation is not yet implemented!");
     }
 
 

@@ -16,6 +16,8 @@ public interface IWorkNode
     double GetProgress();
     void AddWorker(Spider spider);
     void RemoveWorker(Spider spider);        
+
+    void Notify();
 }
 #region deprecated
 

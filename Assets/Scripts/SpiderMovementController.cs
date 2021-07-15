@@ -33,6 +33,11 @@ public class SpiderMovementController : MonoBehaviour
             MyTransform.LookAt(TargetTransform);
             MyRigidbody.AddRelativeForce(Vector3.forward * (float)MySpider.Speed, ForceMode.Force);
         }
+        else
+        {
+            MyRigidbody.velocity = Vector3.zero;
+        }        
+        
     }
 
 }

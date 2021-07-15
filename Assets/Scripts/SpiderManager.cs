@@ -53,4 +53,51 @@ public class SpiderManager : MonoBehaviour, IWorkerManager
     {
         throw new System.NotImplementedException();
     }
+
+    private void ProcessKillList()
+    {
+        foreach (Spider s in spiderKillList)
+        {
+            Destroy(s.gameObject);
+        }
+        spiderKillList = new List<Spider>();
+
+    }
+
+    private void ProcessLevelUpSpiderList()
+    {
+        foreach(Spider s in levelUpSpiderList)
+        {
+            s.SpiderLevel += 1;
+        }
+        levelUpSpiderList = new List<Spider>();        
+    }
+
+    private void ProcessIdleSpiderList()
+    {
+        List<Spider> newlyActiveSpiders = new List<Spider>();
+        foreach(Spider s in idleSpiderList)
+        {
+             string currentSpiderObjective = s.Objective;
+             foreach(IWorkNode w in workNodeList)
+             {
+                 if (w.NodeType == currentSpiderObjective)
+                 {
+                     newlyActiveSpiders.Add(s);
+                     break;
+                 }
+             }
+        }
+        foreach(Spider s in newlyActiveSpiders)
+        {
+            idleSpiderList.Remove(s);
+            spiderList.Add(s);
+        }
+
+        foreach(Spider s in idleSpiderList)
+        {
+            s.DoIdleAnim();
+        }
+
+    }
 }
