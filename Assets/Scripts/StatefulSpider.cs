@@ -11,7 +11,11 @@ public class StatefulSpider : MonoBehaviour
         Idle,
     }
 
-    
+
+    public void OnNotify(NEvent nEvent)
+    {
+
+    }  
 
 
 

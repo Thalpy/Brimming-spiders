@@ -15,9 +15,9 @@ public interface IWorkNode
     GameObject Owner {get; set;}
     double GetProgress();
     void AddWorker(Spider spider);
-    void RemoveWorker(Spider spider);        
+    void RemoveWorker(Spider spider);
 
-    void Notify();
+    void Notify(NodeEvent nEvent);
 }
 #region deprecated
 

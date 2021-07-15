@@ -39,6 +39,17 @@ public class TestWorkNode : MonoBehaviour, IWorkNode
 
     void Update()
     {
+        
+        if (workerList.Count == 0 && RemainingWorkTime > 0){return;}
+        if (workerList.Count > 0 && RemainingWorkTime > 0)
+        {
+            for (int i = 0; i <= workerList.Count; i++)
+            {
+                Notify(new NodeTickEvent());
+            }
+        }
+
+
         if (workerList.Count != 0)
         {
             if(RemainingWorkTime <= 0){CompleteWork();}
@@ -132,5 +143,13 @@ public class TestWorkNode : MonoBehaviour, IWorkNode
     {
         Debug.Log("DoFinalAnim method not yet implemented!");
         //Node destruction animation
+    }
+
+    public void Notify(NodeEvent nEvent)
+    {
+        for (int i = 0; i <= workerList.Count - 1; i++)
+        {
+            workerList[i].OnNotify(nEvent);
+        }
     }
 }
