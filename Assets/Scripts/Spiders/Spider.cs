@@ -44,6 +44,8 @@ public class Spider : MonoBehaviour, IWorker
     public double StorageTime { get => storageTime; set => storageTime = value; }
     public string Id { get => id; set => id = value; }
 
+    public State state;
+
     void Start()
     {
         speed = 1.0;

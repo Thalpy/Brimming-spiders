@@ -41,13 +41,7 @@ public class TestWorkNode : MonoBehaviour, IWorkNode
     {
         
         if (workerList.Count == 0 && RemainingWorkTime > 0){return;}
-        if (workerList.Count > 0 && RemainingWorkTime > 0)
-        {
-            for (int i = 0; i <= workerList.Count; i++)
-            {
-                Notify(new NodeTickEvent());
-            }
-        }
+       
 
 
         if (workerList.Count != 0)
@@ -145,11 +139,5 @@ public class TestWorkNode : MonoBehaviour, IWorkNode
         //Node destruction animation
     }
 
-    public void Notify(NodeEvent nEvent)
-    {
-        for (int i = 0; i <= workerList.Count - 1; i++)
-        {
-            workerList[i].OnNotify(nEvent);
-        }
-    }
+
 }

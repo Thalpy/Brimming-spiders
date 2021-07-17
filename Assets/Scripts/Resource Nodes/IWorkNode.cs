@@ -17,7 +17,6 @@ public interface IWorkNode
     void AddWorker(Spider spider);
     void RemoveWorker(Spider spider);
 
-    void Notify(NodeEvent nEvent);
 }
 #region deprecated
 
