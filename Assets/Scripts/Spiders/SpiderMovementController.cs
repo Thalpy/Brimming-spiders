@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpiderMovementController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class SpiderMovementController : MonoBehaviour
 
     [SerializeField] bool atTarget;
 
+    public NavMeshAgent agent;
+
     public Transform TargetTransform { get => targetTransform; set => targetTransform = value; }
     public Transform MyTransform { get => myTransform; set => myTransform = value; }
     public Rigidbody MyRigidbody { get => myRigidbody; set => myRigidbody = value; }
@@ -26,8 +29,23 @@ public class SpiderMovementController : MonoBehaviour
         mySpider = GetComponent<Spider>();
         myTransform = GetComponent<Transform>();
         myRigidbody = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
+        
     }
 
+    public void RotateAndMoveTowardsTarget()
+    {
+        if(targetTransform == null){return;}
+        if(Vector3.Distance(MyTransform.position, TargetTransform.position) > 0)
+        {
+            agent.destination = TargetTransform.position;
+        }
+
+    }
+
+
+    #region deprecated
+    /*
     public void RotateAndMoveTowardsTarget()
     {
         if(targetTransform == null){return;}
@@ -42,5 +60,9 @@ public class SpiderMovementController : MonoBehaviour
         }        
         
     }
+
+    */
+
+    #endregion
 
 }

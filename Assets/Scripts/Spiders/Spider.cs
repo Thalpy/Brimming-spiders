@@ -77,23 +77,24 @@ public class Spider : StateMachine
         return currentResource;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Resource")        
+        if (collision.gameObject.tag == "Resource" && objective == "Resource")        
         {
             Debug.Log("Hey this is a Resource!");
-            workNode =  collision.gameObject.GetComponent<IWorkNode>();
+            workNode = collision.gameObject.GetComponent<Transform>().parent.gameObject.GetComponent<IWorkNode>();           
             workNode.AddWorker(this);
         }
-        if (collision.gameObject.tag == "Store")        
+        if (collision.gameObject.tag == "Store" && objective == "Store")        
         {
             Debug.Log("Hey this is a Store!");
-            workNode =  collision.gameObject.GetComponent<IWorkNode>();
+            workNode = collision.gameObject.GetComponent<Transform>().parent.gameObject.GetComponent<IWorkNode>();      
+            //workNode =  collision.gameObject.GetComponent<IWorkNode>();
             workNode.AddWorker(this);
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.GetComponent<IWorkNode>() == workNode)
         {
