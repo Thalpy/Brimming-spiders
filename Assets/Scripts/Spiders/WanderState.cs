@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Wander state occurs when spider has nothing else to do - spider will navigate to a random nearby point
+/// before returning to the idle state
+/// </summary>
 internal class WanderState : State
 {
     public WanderState(Spider spider) : base(spider)
@@ -15,7 +19,10 @@ internal class WanderState : State
         yield return null;
 
     }
-
+    /// <summary>
+    /// Wander co-routine - chooses a random target position for the spider then moves towards it
+    /// </summary>
+    /// <returns></returns>
     public override IEnumerator Wander()
     {
         Vector3 currentPosition = spider.spiderMovementController.MyTransform.position;

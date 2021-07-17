@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
-
+/// <summary>
+/// Movement state - when a spider has an objective which it is not proxmial to, it will navigate towards it.
+/// </summary>
 internal class MovementState : State
 {
     public MovementState(Spider spider) : base(spider)
@@ -22,9 +24,9 @@ internal class MovementState : State
             float distanceToTarget = Vector3.Distance(spider.spiderMovementController.MyTransform.position, spider.spiderMovementController.TargetTransform.position);
             float targetRadius = spider.spiderMovementController.TargetTransform.GetComponent<SphereCollider>().radius;
             //Debug.Log($"Spider {spider.Id}'s distance to target is {distanceToTarget}");
-            if (distanceToTarget <= targetRadius+1f)
+            if (distanceToTarget <= targetRadius+1f) //Check that we're within range of the target
             {
-                if(spider.Objective == "Resource")
+                if(spider.Objective == "Resource") 
                 {
                     spider.SetState(new GatherState(spider));
                     yield break;
@@ -35,17 +37,12 @@ internal class MovementState : State
                     yield break;
                 }
             }
-            else
+            else //If the spider hasn't yet reached the objective, invoke the relevent movement function (30 times per second - possibly tweak if performance is poor)
             {
                 spider.spiderMovementController.RotateAndMoveTowardsTarget();
                 yield return new WaitForSeconds(1/30);
             }
         }
-
-
-
-
-
 
             #region deprecated
             /*

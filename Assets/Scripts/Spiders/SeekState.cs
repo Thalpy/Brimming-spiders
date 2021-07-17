@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// In the seek state, spiders check to see if there are any matching targets.
+/// </summary>
 internal class SeekState : State
 {
     public SeekState(Spider spider) : base(spider)
@@ -23,19 +26,22 @@ internal class SeekState : State
 
         spider.spiderObjectiveFinder.Objective = spider.Objective;
         Transform targetTransform = spider.spiderObjectiveFinder.GetObjectiveTransform(spider.GetComponent<Transform>());
-        if (targetTransform == null)
+        if (targetTransform == null) //If the spider can't find a matching target, it should go for a wander
         {
             spider.SetState(new WanderState(spider));
             yield break;
         }
-        else
+        else //If the spider finds an objective it should switch to the movement state and navigate towards it.
         {
             spider.spiderMovementController.TargetTransform = targetTransform;
             spider.SetState(new MovementState(spider));
             yield break;
         }
 
-    }
+    } 
+
+
+
     
 
 

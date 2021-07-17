@@ -4504,15 +4504,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7031933572042621004, guid: 3388ec0c8e2c5b54cb770572e18d0502, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7031933572042621004, guid: 3388ec0c8e2c5b54cb770572e18d0502, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7031933572042621004, guid: 3388ec0c8e2c5b54cb770572e18d0502, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7031933572042621004, guid: 3388ec0c8e2c5b54cb770572e18d0502, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4552,6 +4552,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7031933572042621004, guid: 3388ec0c8e2c5b54cb770572e18d0502, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357979292409455183, guid: 3388ec0c8e2c5b54cb770572e18d0502, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6682,6 +6686,7 @@ GameObject:
   - component: {fileID: 1460696999}
   - component: {fileID: 1460696998}
   - component: {fileID: 1460696997}
+  - component: {fileID: 1460697000}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -6753,6 +6758,22 @@ Transform:
   m_Father: {fileID: 1422882527}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!208 &1460697000
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460696996}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 10.400001, y: 5.3, z: 3.5000002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 3.5000002}
+  m_TimeToStationary: 0.5
 --- !u!1 &1463492889
 GameObject:
   m_ObjectHideFlags: 0
