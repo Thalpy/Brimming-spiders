@@ -13,10 +13,13 @@ public class SpiderMovementController : MonoBehaviour
 
     [SerializeField] Spider mySpider;
 
+    [SerializeField] bool atTarget;
+
     public Transform TargetTransform { get => targetTransform; set => targetTransform = value; }
     public Transform MyTransform { get => myTransform; set => myTransform = value; }
     public Rigidbody MyRigidbody { get => myRigidbody; set => myRigidbody = value; }
     public Spider MySpider { get => mySpider; set => mySpider = value; }
+    public bool AtTarget { get => atTarget; set => atTarget = value; }
 
     void Awake()
     {

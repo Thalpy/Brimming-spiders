@@ -66,12 +66,14 @@ public class TestWorkNode : MonoBehaviour, IWorkNode
     {
         WorkerList.Add(spider);
         spider.Working = true;
+        spider.spiderMovementController.MyRigidbody.isKinematic = true;
     }
 
     public void RemoveWorker(Spider spider)
     {
         WorkerList.Remove(spider);
         spider.Working = false;
+        spider.spiderMovementController.MyRigidbody.isKinematic = false;
     }
 
     private void PerformWork(double workQuantity)

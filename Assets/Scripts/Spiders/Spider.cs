@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-public class Spider : MonoBehaviour, IWorker
+public class Spider : StateMachine
 {
     [SerializeField] private int spiderLevel;
     [SerializeField] private int maxInventorySize;
@@ -22,9 +22,9 @@ public class Spider : MonoBehaviour, IWorker
 
     [SerializeField] private string objective;
 
-    [SerializeField] SpiderMovementController spiderMovementController;
+    public SpiderMovementController spiderMovementController;
 
-    [SerializeField] SpiderObjectiveFinder spiderObjectiveFinder;
+    public SpiderObjectiveFinder spiderObjectiveFinder;
 
     SphereCollider myCollider;
 
@@ -44,53 +44,21 @@ public class Spider : MonoBehaviour, IWorker
     public double StorageTime { get => storageTime; set => storageTime = value; }
     public string Id { get => id; set => id = value; }
 
-    public State state;
 
     void Start()
     {
-        speed = 1.0;
+        speed = 1;
         spiderObjectiveFinder = new SpiderObjectiveFinder();
         spiderMovementController = GetComponent<SpiderMovementController>();
         id = Guid.NewGuid().ToString();
+        SetState(new Begin(this));
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (working == false)
-        {
-            spiderObjectiveFinder.Objective = objective;
-            Transform targetTransform = spiderObjectiveFinder.GetObjectiveTransform(GetComponent<Transform>());
-            if (targetTransform == null)
-            {
-                DoIdleAnim();
-            }
-            else
-            {
-                spiderMovementController.TargetTransform = targetTransform;
-                spiderMovementController.RotateAndMoveTowardsTarget();
-            }
-
-        }
-        else
-        {
-            DoWorkingAnim();
-        }
-        if(working == true && workNode == null)
-        {
-            working = false;
-        }
-        if(inventoryFull == true)
-        {
-            objective = "Store";
-        }
-
-        if(inventory.Count != 0 && working == false)
-        {
-            objective = "Store";
-        }
-
+       
     }
 
     public void AddResourceToInventory(Resource r)

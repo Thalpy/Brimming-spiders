@@ -11,9 +11,11 @@ public class Begin : State
 
     public override IEnumerator Start()
     {
-        Debug.Log($"A new spider was born!, his name is {spider.Id}");
-        yield break;
+        Debug.Log($"A new spider was born!, his name is {spider.Id}");           
+        
+        spider.SetState(new IdleState(spider));
 
+        yield break;
 
     }
 
