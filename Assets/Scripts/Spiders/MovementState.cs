@@ -21,8 +21,8 @@ internal class MovementState : State
         {
             float distanceToTarget = Vector3.Distance(spider.spiderMovementController.MyTransform.position, spider.spiderMovementController.TargetTransform.position);
             float targetRadius = spider.spiderMovementController.TargetTransform.GetComponent<SphereCollider>().radius;
-            Debug.Log($"Spider {spider.Id}'s distance to target is {distanceToTarget}");
-            if (distanceToTarget <= targetRadius+0.5f)
+            //Debug.Log($"Spider {spider.Id}'s distance to target is {distanceToTarget}");
+            if (distanceToTarget <= targetRadius+1f)
             {
                 if(spider.Objective == "Resource")
                 {
