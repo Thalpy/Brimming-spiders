@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
+public class GatherNodeBaseClass : StateMachine, IWorkNode
 {
     [SerializeField] string nodeType;
+
+    [SerializeField] double depletionTime;
 
     [SerializeField] double standardWorkTime = 10.0;
 
@@ -14,11 +16,15 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
 
     [SerializeField] bool workComplete = false;
 
+    [SerializeField] bool depleted = false;
+
     [SerializeField] List<Spider> workerList = new List<Spider>();
 
     [SerializeField] List<Resource> inventory = new List<Resource>();    
 
     [SerializeField] GameObject owner;
+
+    [SerializeField] GameObject nodeTarget;
 
     public string NodeType { get => nodeType; set => nodeType = value; }
     public double StandardWorkTime { get => standardWorkTime; set => standardWorkTime = value; }
@@ -28,13 +34,26 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
     public List<Spider> WorkerList { get => workerList; set => workerList = value; }
     public List<Resource> Inventory { get => inventory; set => inventory = value; }
     public GameObject Owner { get => owner; set => owner = value; }
+    public bool Depleted { get => depleted; set => depleted = value; }
 
-    void Awake()
+    public double DepletionTime {get => depletionTime; set => depletionTime = value;}
+    public GameObject NodeTarget { get => nodeTarget; set => nodeTarget = value; }
+
+    public void Awake()
     {
         owner = gameObject;
-        RemainingWorkTime = StandardWorkTime;
+        remainingWorkTime = StandardWorkTime;
+        nodeTarget = owner.transform.GetChild(0).gameObject;
+        SetState(new WorkableState(this));
     }
 
+    public void setTargetTag(string value)
+    {
+        nodeTarget.tag = value;
+    }
+
+#region deprecated
+/*
     void Update()
     {
         if (workerList.Count != 0)
@@ -49,6 +68,8 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
             }
         }
     }
+    */
+#endregion
 
     public double GetProgress()
     {
@@ -67,7 +88,7 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
         spider.Working = false;
     }
 
-    private void PerformWork(double workQuantity)
+    public void PerformWork(double workQuantity)
     {
         RemainingWorkTime -= workQuantity;
         if (RemainingWorkTime <= 0)
@@ -81,18 +102,18 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
 
     }
 
-    private void PerformWorkAnim()
+    public void PerformWorkAnim()
     {
         Debug.Log("Work anim has not been implemented!");
     }
 
 
-    private void GiveResourceToWorker(Resource r, Spider s)
+    public void GiveResourceToWorker(Resource r, Spider s)
     {
         s.AddResourceToInventory(r);
     }
 
-    private Resource YieldResource()
+    public Resource YieldResource()
     {
         Resource currentResource = Inventory[0];
         Inventory.RemoveAt(0);
@@ -119,16 +140,21 @@ public class GatherNodeBaseClass : MonoBehaviour, IWorkNode
         DestroyNode();
     }
 
-    private void DestroyNode()
+    public void DestroyNode()
     {
         
         Destroy(this.gameObject);
         DoFinalAnim();
     }
 
-    private void DoFinalAnim()
+    public void DoFinalAnim()
     {
         Debug.Log("DoFinalAnim method not yet implemented!");
         //Node destruction animation
+    }
+
+    public virtual void RepopulateNode()
+    {
+        Debug.Log("Method not implemented on base class!");
     }
 }

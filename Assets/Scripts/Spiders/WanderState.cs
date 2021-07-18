@@ -7,16 +7,25 @@ using UnityEngine;
 /// </summary>
 internal class WanderState : State
 {
+    public Vector3 wanderTarget;
+
+    public float wanderDistance;
+
+    public Vector3 currentPosition;
     public WanderState(Spider spider) : base(spider)
     {
+        spider.TimeWandering = 3;
     }
 
     public override IEnumerator Start()
     {
         
-        Debug.Log($"Spider {spider.Id} is now wandering!");
+        Debug.Log($"Spider {spider.Id} is now wandering!");        
+        currentPosition = spider.spiderMovementController.MyTransform.position;
+        wanderTarget = currentPosition + new Vector3(Random.Range(-3f,3f), 0f, Random.Range(-3f,3f));
+        wanderDistance = Vector3.Distance(currentPosition, wanderTarget);
         spider.StartCoroutine(Wander());
-        yield return null;
+        yield break;
 
     }
     /// <summary>
@@ -24,16 +33,17 @@ internal class WanderState : State
     /// </summary>
     /// <returns></returns>
     public override IEnumerator Wander()
-    {
-        Vector3 currentPosition = spider.spiderMovementController.MyTransform.position;
-        Vector3 targetPosition = currentPosition + new Vector3(Random.Range(-1f,1f), 0f, Random.Range(-1f,1f));
-        while (Vector3.Distance(targetPosition, currentPosition) > 0.5f)
+    {    
+        while (wanderDistance >= 0.2f && spider.TimeWandering > 0)
         {
-            spider.spiderMovementController.MyTransform.LookAt(targetPosition);
-            spider.spiderMovementController.MyRigidbody.AddRelativeForce(Vector3.forward * (float)spider.Speed, ForceMode.Force);
-            yield return new WaitForSeconds(1/60);
+            currentPosition = spider.spiderMovementController.MyTransform.position;
+            Debug.Log($"Distance to wander target is {wanderDistance}");
+            Debug.Log($"Time on target is {spider.TimeWandering}");
+            spider.TimeWandering = spider.TimeWandering - (double) 1/30;        
+            spider.spiderMovementController.MoveTowardsPosition(wanderTarget);
+            wanderDistance = Vector3.Distance(currentPosition, wanderTarget);
+            yield return new WaitForSeconds(1/30);
         }
         spider.SetState(new IdleState(spider));
-        yield break;
     }
 }

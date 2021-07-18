@@ -43,6 +43,15 @@ public class SpiderMovementController : MonoBehaviour
 
     }
 
+    public void MoveTowardsPosition(Vector3 pos)
+    {
+        if(pos == null){return;}
+        if(Vector3.Distance(MyTransform.position, pos) > 0)
+        {
+            agent.destination = pos;
+        }
+    }
+
 
     #region deprecated
     /*

@@ -22,9 +22,13 @@ public class Spider : StateMachine
 
     [SerializeField] private string objective;
 
+    [SerializeField] private double timeWandering;
+
     public SpiderMovementController spiderMovementController;
 
     public SpiderObjectiveFinder spiderObjectiveFinder;
+
+
 
     SphereCollider myCollider;
 
@@ -43,7 +47,7 @@ public class Spider : StateMachine
     public string Objective { get => objective; set => objective = value; }
     public double StorageTime { get => storageTime; set => storageTime = value; }
     public string Id { get => id; set => id = value; }
-
+    public double TimeWandering { get => timeWandering; set => timeWandering = value; }
 
     void Start()
     {

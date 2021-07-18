@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    protected State State;
+    protected IStateful State;
 
-    public void SetState(State state)
+    public void SetState(IStateful state)
     {
         State = state;
         StartCoroutine(state.Start());
