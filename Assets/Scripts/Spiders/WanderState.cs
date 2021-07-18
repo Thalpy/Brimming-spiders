@@ -37,12 +37,10 @@ internal class WanderState : State
         while (wanderDistance >= 0.2f && spider.TimeWandering > 0)
         {
             currentPosition = spider.spiderMovementController.MyTransform.position;
-            Debug.Log($"Distance to wander target is {wanderDistance}");
-            Debug.Log($"Time on target is {spider.TimeWandering}");
             spider.TimeWandering = spider.TimeWandering - (double) 1/30;        
             spider.spiderMovementController.MoveTowardsPosition(wanderTarget);
             wanderDistance = Vector3.Distance(currentPosition, wanderTarget);
-            yield return new WaitForSeconds(1/30);
+            yield return new WaitForSeconds((float)1/30);
         }
         spider.SetState(new IdleState(spider));
     }
